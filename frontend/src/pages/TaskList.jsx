@@ -286,7 +286,7 @@ const TaskList = () => {
                           id="taskCheckbox1"
                           className="taskCheckbox sr-only"
                         ></input>
-                        <div className="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-strokedark dark:bg-boxdark-2">
+                        <div className="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-strokedark dark:bg-boxdark2">
                           <span className="text-white opacity-0">
                             <svg
                               className="fill-current"
@@ -316,7 +316,7 @@ const TaskList = () => {
                           className="taskCheckbox sr-only"
                           checked
                         ></input>
-                        <div className="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-strokedark dark:bg-boxdark-2">
+                        <div className="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-strokedark dark:bg-boxdark2">
                           <span className="text-white opacity-0">
                             <svg
                               className="fill-current"
@@ -346,7 +346,7 @@ const TaskList = () => {
                           className="taskCheckbox sr-only"
                           checked
                         ></input>
-                        <div className="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-strokedark dark:bg-boxdark-2">
+                        <div className="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-strokedark dark:bg-boxdark2">
                           <span className="text-white opacity-0">
                             <svg
                               className="fill-current"
@@ -460,7 +460,7 @@ const TaskList = () => {
                           id="taskCheckbox4"
                           className="taskCheckbox sr-only"
                         ></input>
-                        <div className="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-strokedark dark:bg-boxdark-2">
+                        <div className="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-strokedark dark:bg-boxdark2">
                           <span className="text-white opacity-0">
                             <svg
                               className="fill-current"
@@ -490,7 +490,7 @@ const TaskList = () => {
                           className="taskCheckbox sr-only"
                           checked
                         ></input>
-                        <div className="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-strokedark dark:bg-boxdark-2">
+                        <div className="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-strokedark dark:bg-boxdark2">
                           <span className="text-white opacity-0">
                             <svg
                               className="fill-current"
@@ -605,7 +605,7 @@ const TaskList = () => {
                           id="taskCheckbox6"
                           className="taskCheckbox sr-only"
                         ></input>
-                        <div className="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-strokedark dark:bg-boxdark-2">
+                        <div className="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-strokedark dark:bg-boxdark2">
                           <span className="text-white opacity-0">
                             <svg
                               className="fill-current"
@@ -724,7 +724,7 @@ const TaskList = () => {
                           id="taskCheckbox7"
                           className="taskCheckbox sr-only"
                         ></input>
-                        <div className="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-strokedark dark:bg-boxdark-2">
+                        <div className="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-strokedark dark:bg-">
                           <span className="text-white opacity-0">
                             <svg
                               className="fill-current"
@@ -845,7 +845,7 @@ const TaskList = () => {
                           id="taskCheckbox8"
                           className="taskCheckbox sr-only"
                         ></input>
-                        <div className="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-strokedark dark:bg-boxdark-2">
+                        <div className="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-strokedark dark:bg-boxdark2">
                           <span className="text-white opacity-0">
                             <svg
                               className="fill-current"
@@ -874,7 +874,7 @@ const TaskList = () => {
                           id="taskCheckbox9"
                           className="taskCheckbox sr-only"
                         ></input>
-                        <div className="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-strokedark dark:bg-boxdark-2">
+                        <div className="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-strokedark dark:bg-boxdark2">
                           <span className="text-white opacity-0">
                             <svg
                               className="fill-current"
