@@ -1,6 +1,7 @@
 import "./App.css";
 import Calendar from "./pages/Calendar";
 import Dashboard from "./pages/Dashboard";
+import Discussions from "./pages/Discussions";
 import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
 import Settings from "./pages/Settings";
@@ -20,6 +21,8 @@ function App() {
         <Route exact path="/settings" element={<Settings />} />
         <Route exact path="/calendar" element={<Calendar />} />
         <Route exact path="/tasks" element={<TaskList />} />
+        <Route exact path="/discussion" element={<Discussions/>} />
+        {/* <Route exact path="/project" element={<Projects />} /> */}
       </Routes>
     </Router>
   );
