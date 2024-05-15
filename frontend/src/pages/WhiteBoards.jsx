@@ -1,12 +1,12 @@
 import React from "react";
 import DefaultLayout from "../components/DefaultLayout";
 
-function Discussions() {
+function WhiteBoards() {
   return (
     <DefaultLayout>
-      <div>Discussions</div>
+      <div>WhiteBoards</div>
     </DefaultLayout>
   );
 }
 
-export default Discussions;
+export default WhiteBoards;

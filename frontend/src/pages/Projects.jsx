@@ -1,12 +1,12 @@
 import React from "react";
 import DefaultLayout from "../components/DefaultLayout";
 
-function Discussions() {
+function Projects() {
   return (
     <DefaultLayout>
-      <div>Discussions</div>
+      <div>Projects</div>
     </DefaultLayout>
   );
 }
 
-export default Discussions;
+export default Projects;
