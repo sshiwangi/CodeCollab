@@ -93,7 +93,7 @@ function Signup() {
 
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
-      // navigate("/"); // Updated navigation
+      navigate("/dashboard/profile"); // Updated navigation
     } catch (error) {
       console.log(error);
       toast({

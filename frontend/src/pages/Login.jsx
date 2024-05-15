@@ -56,7 +56,7 @@ function Login() {
 
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
-      navigate("/");
+      navigate("/dashboard/profile");
     } catch (error) {
       toast({
         title: "Error Occurred!",
