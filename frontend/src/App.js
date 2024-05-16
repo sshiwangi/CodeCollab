@@ -8,6 +8,7 @@ import Discussions from "./pages/Discussions";
 import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
 import Projects from "./pages/Projects";
+import Settings from "./pages/Settings";
 // import Settings from "./pages/Settings";
 import Signup from "./pages/Signup";
 // import TaskList from "./pages/TaskList";
@@ -25,8 +26,8 @@ function App() {
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/dashboard" element={<Dashboard />} />
         <Route exact path="/dashboard/profile" element={<Profile />} />
-        {/* <Route exact path="/dashboard/settings" element={<Settings />} />
-        <Route exact path="/dashboard/calendar" element={<Calendar />} />
+        <Route exact path="/dashboard/settings" element={<Settings />} />
+         {/*<Route exact path="/dashboard/calendar" element={<Calendar />} />
         <Route exact path="/dashboard/tasks" element={<TaskList />} /> */}
         <Route exact path="/dashboard/discussion" element={<Discussions />} />
         <Route exact path="/dashboard/whiteboards" element={<WhiteBoards />} />
