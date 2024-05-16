@@ -61,25 +61,6 @@ const login = asyncHandler(async (req, res) => {
     throw new Error("Invalid email or password");
   }
 });
-// Controller to get all projects of a user
-const getAllUserProjects = asyncHandler(async (req, res) => {
-  const userId = req.params.id; // Assuming user ID is stored in req.params.id
-  const projects = await Project.find({ contributors: userId });
-  res.json(projects);
-});
-
-// Controller to get all collaboration requests of all projects of a user
-const getAllUserProjectsRequests = asyncHandler(async (req, res) => {
-  const userId = req.params.id; // Assuming user ID is stored in req.params.id
-  const projects = await Project.find({ contributors: userId });
-
-  // Collect all requests from all projects
-  const allRequests = projects.reduce((requests, project) => {
-    return requests.concat(project.requests);
-  }, []);
-
-  res.json(allRequests);
-});
 
 const allUsers = asyncHandler(async (req, res) => {
   try {
@@ -114,6 +95,28 @@ const fetchUserProfile = asyncHandler(async (req, res) => {
 
   res.json(user);
 });
+
+// Controller to get all projects of a user
+const getAllUserProjects = asyncHandler(async (req, res) => {
+  const userId = req.params.id; // Assuming user ID is stored in req.params.id
+  const projects = await Project.find({ contributors: userId });
+  res.json(projects);
+});
+
+// Controller to get all collaboration requests of all projects of a user
+const getAllUserProjectsRequests = asyncHandler(async (req, res) => {
+  const userId = req.params.id; // Assuming user ID is stored in req.params.id
+  const projects = await Project.find({ contributors: userId });
+
+  // Collect all requests from all projects
+  const allRequests = projects.reduce((requests, project) => {
+    return requests.concat(project.requests);
+  }, []);
+
+  res.json(allRequests);
+});
+
+
 
 module.exports = {
   signup,

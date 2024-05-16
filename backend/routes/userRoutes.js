@@ -1,10 +1,9 @@
 const express = require("express");
 const {
   signup,
-  login,
+  login, allUsers,
   getAllUserProjects,
   getAllUserProjectsRequests,
-  allUsers,
   fetchUserProfile,
 } = require("../controllers/userControllers");
 
