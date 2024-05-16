@@ -31,8 +31,8 @@ function Projects() {
   };
   return (
     <DefaultLayout>
-      <div className="bg-gradient-to-r from-violet-100 relative to-indigo-100 flex items-center justify-center h-screen">
-        <div className="w-full sm:w-full md:w-full lg:w-full backdrop-blur-sm bg-white/40 p-6 rounded-lg shadow-sm border-violet-200 border h-full">
+      <div className="bg-gradient-to-r from-violet-100 relative to-indigo-100 flex items-center justify-center h-screen dark:border-strokedark dark:bg-boxdark">
+        <div className="w-full sm:w-full md:w-full lg:w-full backdrop-blur-sm bg-white/40 p-6 rounded-lg shadow-sm border-violet-200 border h-full dark:border-strokedark dark:bg-boxdark">
           <div className="w-full flex justify-between items-center p-3">
             <h2 className="text-xl font-semibold">My Project</h2>
             <button

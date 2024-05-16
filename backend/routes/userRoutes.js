@@ -4,7 +4,6 @@ const {
   login, allUsers,
   getAllUserProjects,
   getAllUserProjectsRequests,
-  allUsers
 } = require("../controllers/userControllers");
 
 
