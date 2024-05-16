@@ -103,6 +103,27 @@ const getAllUserProjectsRequests = asyncHandler(async (req, res) => {
   res.json(allRequests);
 });
 
+const allUsers = asyncHandler(async (req, res) => {
+  try {
+ const keyword = req.query.search
+    ? {
+        $or: [
+          { name: { $regex: req.query.search, $options: "i" } },
+          { email: { $regex: req.query.search, $options: "i" } },
+        ],
+      }
+    : {};
+
+  const users = await User.find(keyword).find({ _id: { $ne: req.user?._id } });
+  // console.log(users)
+  res.send(users);
+  } catch(err) {
+    console.log(err)
+  }
+ 
+});
+
+
 module.exports = {
   signup,
   login,
@@ -110,3 +131,4 @@ module.exports = {
   getAllUserProjectsRequests,
   allUsers
 };
+
