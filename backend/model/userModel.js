@@ -9,6 +9,7 @@ const userSchema = mongoose.Schema(
     confirmpassword: { type: String },
   },
   { timestamp: true }
+
 );
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);

@@ -15,9 +15,7 @@ const MyChats = ({ fetchAgain }) => {
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
 
   const toast = useToast();
-  const apiUrl =
-    process.env.REACT_APP_BACKEND_URL ||
-    "https://chatter-box-0bzs.onrender.com";
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8088";
 
   const fetchChats = async () => {
     // console.log(user._id);

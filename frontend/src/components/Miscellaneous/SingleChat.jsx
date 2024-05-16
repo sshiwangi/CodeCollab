@@ -19,7 +19,7 @@ import UpdateGroupChatModal from "../UserAvatar/UpdateGroupChatModal";
 import ScrollableChat from "../Miscellaneous/ScrollableChat";
 import animationData from "../../animations/typing.json";
 // import io from "socket.io-client";
-const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = "http://localhost:8088";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {

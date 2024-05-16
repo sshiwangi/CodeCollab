@@ -9,9 +9,9 @@ import { ChakraProvider } from '@chakra-ui/react'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
  <React.StrictMode>
-    <ChatProvider>
+   <ChatProvider>
       <ChakraProvider>
-      <App />
+        <App />
       </ChakraProvider>
     </ChatProvider>
   </React.StrictMode>,
