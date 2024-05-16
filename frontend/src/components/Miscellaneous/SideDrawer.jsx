@@ -31,6 +31,8 @@ import ChatLoading from "../Miscellaneous/ChatLoading";
 import UserListItem from "../UserAvatar/UserListItem";
 import { useNavigate } from "react-router-dom";
 import { getSender } from "../../config/ChatLogics";
+import searchIcon from "../../Images/searchicon.png";
+// import DarkModeSwitcher from "../../Header/DarkModeSwitcher";
 
 const SideDrawer = () => {
   const [search, setSearch] = useState("");
@@ -49,7 +51,7 @@ const SideDrawer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
 
-  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8088";
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8088 ";
   const logoutHandler = () => {
     localStorage.removeItem("userInfo");
     navigate("/");
@@ -77,7 +79,7 @@ const SideDrawer = () => {
       };
 
       const { data } = await axios.get(
-        apiUrl + `/api/user?search=${search}`,
+        apiUrl + `/api/user/users?search=${search}`,
         config
       );
 
@@ -95,6 +97,9 @@ const SideDrawer = () => {
     }
   };
 
+  // const token = localStorage.getItem("userInfo")
+  //   ? JSON.parse(localStorage.getItem("userInfo")).token
+  //   : null;
   const accessChat = async (userId) => {
     try {
       setLoadingChat(true);
@@ -139,7 +144,7 @@ const SideDrawer = () => {
       >
         <Tooltip label="Search Users to chat" hashArrow placement="bottom-end">
           <Button variant="ghost" onClick={onOpen}>
-            <i class="fas fa-search"></i>
+            <img src={searchIcon} width={30} height={40} alt="Search icon" />
             <Text display={{ base: "none", md: "flex" }} px="4">
               {" "}
               Search User
