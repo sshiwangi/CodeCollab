@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../model/userModel");
 const generateToken = require("../config/generateToken");
+const Project = require("../model/projectModel");
 
 const signup = asyncHandler(async (req, res) => {
   const { name, email, password, confirmPassword } = req.body;
@@ -26,7 +27,7 @@ const signup = asyncHandler(async (req, res) => {
     name,
     email,
     password,
-    confirmPassword
+    confirmPassword,
   });
 
   if (user) {
@@ -81,4 +82,31 @@ const allUsers = asyncHandler(async (req, res) => {
  
 });
 
-module.exports = { signup, login , allUsers};
+
+// Controller to get all projects of a user
+const getAllUserProjects = asyncHandler(async (req, res) => {
+  const userId = req.params.id; // Assuming user ID is stored in req.params.id
+  const projects = await Project.find({ contributors: userId });
+  res.json(projects);
+});
+
+// Controller to get all collaboration requests of all projects of a user
+const getAllUserProjectsRequests = asyncHandler(async (req, res) => {
+  const userId = req.params.id; // Assuming user ID is stored in req.params.id
+  const projects = await Project.find({ contributors: userId });
+
+  // Collect all requests from all projects
+  const allRequests = projects.reduce((requests, project) => {
+    return requests.concat(project.requests);
+  }, []);
+
+  res.json(allRequests);
+});
+
+module.exports = {
+  signup,
+  login,
+  getAllUserProjects,
+  getAllUserProjectsRequests,
+  allUsers
+};
