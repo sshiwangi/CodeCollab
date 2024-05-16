@@ -30,6 +30,11 @@ function App() {
         <Route exact path="/dashboard/tasks" element={<TaskList />} /> */}
         <Route exact path="/dashboard/discussion" element={<Discussions />} />
         <Route exact path="/dashboard/whiteboards" element={<WhiteBoards />} />
+        <Route
+          exact
+          path="/dashboard/projects/addproject"
+          element={<AddProject />}
+        />
         <Route exact path="/dashboard/chat" element={<Chat />} />
         <Route
           exact
