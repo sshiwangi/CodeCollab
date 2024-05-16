@@ -5,12 +5,13 @@ import MyChats from "../components/Miscellaneous/MyChats";
 import ChatBox from "../components/Miscellaneous/ChatBox";
 import { useState } from "react";
 
-const Chat = () => {
+const ChatPage = () => {
   const { user } = ChatState();
   const [fetchAgain, setFetchAgain] = useState(false);
 
   return (
     <div style={{ width: "100%" }}>
+      {" "}
       {user && <SideDrawer />}
       <Box
         display="flex"
@@ -28,4 +29,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default ChatPage;
