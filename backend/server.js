@@ -1,14 +1,14 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const colors = require("colors");
-const chatRoutes=require("./routes/chatRoutes");
-const messageRoutes=require("./routes/messageRoutes");
+const chatRoutes = require("./routes/chatRoutes");
+const messageRoutes = require("./routes/messageRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const connectDB = require("./config/db");
-const path = require('path');
+const path = require("path");
 const app = express();
 
 app.use(cors());
@@ -35,32 +35,30 @@ app.use((req, res, next) => {
   next();
 });
 
-
-app.use('/api/user',userRoutes);
-app.use('/api/chat', chatRoutes);
-app.use('/api/message', messageRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/chat", chatRoutes);
+app.use("/api/message", messageRoutes);
 app.use("/api/projects", projectRoutes);
-
 
 app.use(notFound);
 app.use(errorHandler);
 
-const io= require('socket.io')(server, {
-    pingTimeout:60000,
-    cors: {
-        origin: "http://localhost:8088",
-    },
+const io = require("socket.io")(server, {
+  pingTimeout: 60000,
+  cors: {
+    origin: "http://localhost:8088",
+  },
 });
 
-io.on("connection", (socket)=>{
-    console.log('connected to socket.io');
+io.on("connection", (socket) => {
+  console.log("connected to socket.io");
 
-    socket.on('setup', (userData)=>{
-          socket.join(userData._id) // Join the room
-          console.log(userData._id);
-          socket.emit("connected");
-    });
-   socket.on("join chat", (room) => {
+  socket.on("setup", (userData) => {
+    socket.join(userData._id); // Join the room
+    console.log(userData._id);
+    socket.emit("connected");
+  });
+  socket.on("join chat", (room) => {
     socket.join(room);
     console.log("User Joined Room: " + room);
   });
@@ -79,10 +77,11 @@ io.on("connection", (socket)=>{
       socket.in(user._id).emit("message recieved", newMessageRecieved);
     });
   });
-    socket.off("setup", () => {
+  socket.on("canvasImage", (data) => {
+    socket.broadcast.emit("canvasImage", data);
+  });
+  socket.off("setup", () => {
     console.log("USER DISCONNECTED");
     socket.leave(userData._id);
   });
 });
-
-
