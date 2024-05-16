@@ -1,22 +1,21 @@
 const express = require("express");
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 const colors = require("colors");
-const cors = require('cors');
-const userRoutes= require("./routes/userRoutes");
 const chatRoutes=require("./routes/chatRoutes");
 const messageRoutes=require("./routes/messageRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
+const cors = require("cors");
+const userRoutes = require("./routes/userRoutes");
+const projectRoutes = require("./routes/projectRoutes");
 const connectDB = require("./config/db");
 const path = require('path');
 const app = express();
-
 
 app.use(cors());
 app.use(express.json());
 
 dotenv.config();
 connectDB();
-
 
 app.get("/", (req, res) => {
   res.send("Backend is working");
@@ -36,9 +35,11 @@ app.use((req, res, next) => {
   next();
 });
 
+
 app.use('/api/user',userRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/message', messageRoutes);
+app.use("/api/projects", projectRoutes);
 
 
 app.use(notFound);
@@ -83,3 +84,5 @@ io.on("connection", (socket)=>{
     socket.leave(userData._id);
   });
 });
+
+
