@@ -1,13 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import UserOne from "../Images/workingProfessional.jpg";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
 
   const trigger = useRef(null);
   const dropdown = useRef(null);
+  const logoutHandler = () => {
+    localStorage.removeItem("userInfo");
+    navigate("/");
+  };
 
   // close on click outside
   useEffect(() => {
@@ -149,9 +154,9 @@ const DropdownUser = () => {
           </li>
         </ul>
         <ul className="flex flex-col gap-5 px-6 py-4">
-          <li>
+          <li onClick={logoutHandler}>
             <Link
-              to="/logout"
+              to="/"
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
             >
               <svg

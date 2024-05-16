@@ -14,7 +14,7 @@ function Login() {
   const toast = useToast();
   const navigate = useNavigate();
 
-  const apiUrl = process.env.API_URL || "http://localhost:8088";
+  const apiUrl = "http://localhost:8088";
 
   const handleClick = () => setShow(!show);
   const submitHandler = async () => {
@@ -45,7 +45,7 @@ function Login() {
         { email, password },
         config
       );
-
+      console.log(data);
       toast({
         title: "Login Successful",
         status: "success",
@@ -56,7 +56,7 @@ function Login() {
 
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
-      navigate("/dashboard/profile");
+      navigate("/dashboard");
     } catch (error) {
       toast({
         title: "Error Occurred!",
@@ -87,7 +87,7 @@ function Login() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6">
+          <div className="space-y-6">
             <div>
               <label
                 htmlFor="email"
@@ -149,15 +149,15 @@ function Login() {
 
             <div>
               <button
-                type="submit"
+                // type="submit"
                 onClick={submitHandler}
-                isLoading={loading}
+                // isLoading={loading}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Sign in
               </button>
             </div>
-          </form>
+          </div>
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Don't have an account?{" "}

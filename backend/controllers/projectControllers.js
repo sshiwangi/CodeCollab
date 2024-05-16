@@ -21,17 +21,17 @@ const getSingleProject = asyncHandler(async (req, res) => {
 
 // Controller to create a new project
 const createProject = asyncHandler(async (req, res) => {
-  const { name, description, projectUrl } = req.body;
+  const { name, description, githubLink } = req.body;
 
   // Check if required fields are provided
-  if (!name || !description || !projectUrl) {
+  if (!name || !description || !githubLink) {
     return res
       .status(400)
-      .json({ message: "Name, description, and project URL are required" });
+      .json({ message: "Name, description, and github URL are required" });
   }
 
   // Create the project
-  const project = await Project.create({ name, description, projectUrl });
+  const project = await Project.create({ name, description, githubLink });
 
   res.status(201).json(project);
 });
@@ -125,6 +125,14 @@ const rejectCollaborationRequest = asyncHandler(async (req, res) => {
   res.json({ message: "Collaboration request rejected successfully" });
 });
 
+// const searchProjectsByName = asyncHandler(async (req, res) => {
+//   const { name } = req.query;
+//   // Use a regular expression for case-insensitive search
+//   const regex = new RegExp(name, "i");
+//   const projects = await Project.find({ name: regex });
+//   res.json(projects);
+// });
+
 // Exporting the controllers
 module.exports = {
   getAllProjects,
@@ -135,4 +143,5 @@ module.exports = {
   requestStatus,
   approveCollaborationRequest,
   rejectCollaborationRequest,
+  // searchProjectsByName,
 };

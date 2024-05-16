@@ -13,7 +13,7 @@ function Discussions() {
           <AddButton />
         </div>
 
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-4 justify-center">
           <DiscussionCard />
           <DiscussionCard />
           <DiscussionCard />
