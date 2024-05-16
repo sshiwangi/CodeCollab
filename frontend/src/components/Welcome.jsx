@@ -1,7 +1,8 @@
 import React from "react";
 import discussion from "../Images/discussion.jpg";
-import chatelement from "../Images/chatselement.jpg";
+import whiteboard from "../Images/whiteboard.jpg";
 import createproject from "../Images/createproject.jpg";
+import { Link } from "react-router-dom";
 
 function Welcome() {
   return (
@@ -18,9 +19,11 @@ function Welcome() {
                 Revolutionize your coding experience with our collaborative
                 platform, empowering developers to code together effortlessly.
               </p>
-              <button class="text-white bg-black hover:opacity-80 py-2 px-4 rounded-md">
-                Explore the app
-              </button>
+              <Link to="/">
+                <button class="text-white bg-black hover:opacity-80 py-2 px-4 rounded-md">
+                  Explore the app
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -36,9 +39,11 @@ function Welcome() {
               <p class="text-white text-md mb-4">
                 Create projects and collaborate with others effortlessly.
               </p>
-              <button class="text-black bg-white hover:opacity-80 py-2 px-4 rounded-md">
-                Explore
-              </button>
+              <Link to="/dashboard/projects">
+                <button class="text-black bg-white hover:opacity-80 py-2 px-4 rounded-md">
+                  Explore
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -52,25 +57,30 @@ function Welcome() {
               <p class="text-white text-md mb-4 ">
                 Stuck somewhere? Ask your doubts in the discussion section.
               </p>
-              <button class="text-black bg-white hover:opacity-80 py-2 px-4 rounded-md">
-                Explore
-              </button>
+              <Link to="/dashboard/discussion">
+                <button class="text-black bg-white hover:opacity-80 py-2 px-4 rounded-md">
+                  Explore
+                </button>
+              </Link>
             </div>
           </div>
         </div>
         <div class="rounded-md shadow-sm cursor-pointer flex flex-col gap-2 border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300">
           <div class=" flex flex-col justify-center items-center">
             <div className="h-[1/2] mb-3">
-              <img src={chatelement} w-full h-full alt="Discussion image" />
+              <img src={whiteboard} w-full h-full alt="Whiteboard Image" />
             </div>
             <div class="bg-black rounded-md flex flex-col justify-center items-center  p-2 ">
-              <p class="text-white text-md font-bold mb-4">Chats</p>
+              <p class="text-white text-md font-bold mb-4">WhiteBoard</p>
               <p class="text-white text-md mb-4">
-                Chat with anyone one-to-one or in groups to solve your doubts.
+                Our whiteboard feature allows users sharing ideas on a virtual
+                canvas.
               </p>
-              <button class="text-black bg-white hover:opacity-80 py-2 px-4 rounded-md">
-                Explore
-              </button>
+              <Link to="/dashboard/whiteboards">
+                <button class="text-black bg-white hover:opacity-80 py-2 px-4 rounded-md">
+                  Explore
+                </button>
+              </Link>
             </div>
           </div>
         </div>
