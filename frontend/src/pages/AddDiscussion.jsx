@@ -1,13 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import DefaultLayout from "../components/DefaultLayout";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@chakra-ui/react";
 
 function AddDiscussion() {
+  const [title, setTitle] = useState("");
+  const [question, setQuestion] = useState("");
+  const navigate = useNavigate();
+  const toast = useToast();
+
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDUxMGMwYTRmNWY4YzU1ZGNiZjk1NCIsImlhdCI6MTcxNTgwMjM5NywiZXhwIjoxNzE4Mzk0Mzk3fQ.Yq-lCFkJ88TTUt09CfZBSfOSC4uSBeELZDFoAUUTCQY";
+  const handleDiscussionCreation = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:8088/api/discussions/adddiscussion",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            title,
+            question,
+          }),
+        }
+      );
+      if (response.ok) {
+        // Project added successfully
+        console.log("Discussion added successfully");
+        toast({
+          title: "Discussion added successfully",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+          position: "bottom",
+        });
+        navigate("/dashboard/discussion");
+        // Optionally, you can redirect the user or show a success message
+      } else {
+        // Error occurred while adding project
+        console.error("Error adding project:", response.statusText);
+        // Optionally, you can show an error message to the user
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <DefaultLayout>
       <div>
         <div class="heading text-center font-bold text-2xl m-5 text-gray-800">
-          New Post
+          Start New Discussion
         </div>
+        {/* <p>People can view your questions and can view, like and comment.</p> */}
 
         <div className="editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl">
           <input
@@ -15,14 +62,18 @@ function AddDiscussion() {
             spellcheck="false"
             placeholder="Title"
             type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
           <textarea
             className="description bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none"
             spellcheck="false"
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
             placeholder="Describe everything about this post here"
           ></textarea>
 
-          <div className="icons flex text-gray-500 m-2">
+          {/* <div className="icons flex text-gray-500 m-2">
             <svg
               className="mr-2 cursor-pointer hover:text-gray-700 border rounded-full p-1 h-7"
               xmlns="http://www.w3.org/2000/svg"
@@ -74,13 +125,16 @@ function AddDiscussion() {
             <div className="count ml-auto text-gray-400 text-xs font-semibold">
               0/300
             </div>
-          </div>
+          </div> */}
 
           <div className="buttons flex">
-            <div className="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">
+            {/* <div className="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">
               Cancel
-            </div>
-            <div className="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500">
+            </div> */}
+            <div
+              onClick={handleDiscussionCreation}
+              className="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500"
+            >
               Post
             </div>
           </div>

@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const colors = require("colors");
 const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoutes");
+const discussionRoutes = require("./routes/discussionRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
@@ -39,6 +40,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/message", messageRoutes);
 app.use("/api/projects", projectRoutes);
+app.use("/api/discussions", discussionRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

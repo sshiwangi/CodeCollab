@@ -83,30 +83,43 @@ const getAllUserProjectsRequests = asyncHandler(async (req, res) => {
 
 const allUsers = asyncHandler(async (req, res) => {
   try {
- const keyword = req.query.search
-    ? {
-        $or: [
-          { name: { $regex: req.query.search, $options: "i" } },
-          { email: { $regex: req.query.search, $options: "i" } },
-        ],
-      }
-    : {};
+    const keyword = req.query.search
+      ? {
+          $or: [
+            { name: { $regex: req.query.search, $options: "i" } },
+            { email: { $regex: req.query.search, $options: "i" } },
+          ],
+        }
+      : {};
 
-  const users = await User.find(keyword).find({ _id: { $ne: req.user?._id } });
-  // console.log(users)
-  res.send(users);
-  } catch(err) {
-    console.log(err)
+    const users = await User.find(keyword).find({
+      _id: { $ne: req.user?._id },
+    });
+    // console.log(users)
+    res.send(users);
+  } catch (err) {
+    console.log(err);
   }
- 
 });
 
+const fetchUserProfile = asyncHandler(async (req, res) => {
+  const userId = req.params.id;
+
+  const user = await User.findById(userId);
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  res.json(user);
+});
 
 module.exports = {
   signup,
   login,
   getAllUserProjects,
   getAllUserProjectsRequests,
-  allUsers
+  allUsers,
+  fetchUserProfile,
 };
-

@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-function DiscussionCard() {
+function DiscussionCard({ title, question, creatorId }) {
+  const [creatorDetails, setCreatorDetails] = useState(null);
+  console.log(creatorId);
+
+  useEffect(() => {
+    const fetchCreatorDetails = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8088/api/user/${creatorId}`
+        );
+        setCreatorDetails(response.data);
+      } catch (error) {
+        console.error("Error fetching creator details:", error);
+      }
+    };
+
+    if (creatorId) {
+      fetchCreatorDetails();
+    }
+  }, [creatorId]);
+  console.log(creatorDetails);
   return (
     <div>
       {" "}
@@ -8,27 +28,21 @@ function DiscussionCard() {
         <div class="flex w-full items-center justify-between border-b pb-3">
           <div className="flex items-center space-x-3">
             <div className="h-8 w-8 rounded-full bg-slate-400 bg-[url('https://i.pravatar.cc/32')]"></div>
-            <div className="text-lg font-bold text-slate-700">Joe Smith</div>
+            <div className="text-lg font-bold text-slate-700">
+              {creatorDetails && creatorDetails.name}
+            </div>
           </div>
-          <div className="flex items-center space-x-8">
+          {/* <div className="flex items-center space-x-8">
             <button className="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">
               Category
             </button>
             <div className="text-xs text-neutral-500">2 hours ago</div>
-          </div>
+          </div> */}
         </div>
 
         <div className="mt-4 mb-6">
-          <div className="mb-3 text-xl font-bold">
-            Nulla sed leo tempus, feugiat velit vel, rhoncus neque?
-          </div>
-          <div className="text-sm text-neutral-600">
-            Aliquam a tristique sapien, nec bibendum urna. Maecenas convallis
-            dignissim turpis, non suscipit mauris interdum at. Morbi sed gravida
-            nisl, a pharetra nulla. Etiam tincidunt turpis leo, ut mollis ipsum
-            consectetur quis. Etiam faucibus est risus, ac condimentum mauris
-            consequat nec. Curabitur eget feugiat massa
-          </div>
+          <div className="mb-3 text-xl font-bold">{title}</div>
+          <div className="text-sm text-neutral-600">{question}</div>
         </div>
 
         <div>
