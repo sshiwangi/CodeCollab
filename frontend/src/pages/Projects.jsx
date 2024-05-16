@@ -1,15 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DefaultLayout from "../components/DefaultLayout";
+import AddNote from "../components/AddNote";
+import { useNavigate } from "react-router-dom";
 
 function Projects() {
+  const [projects, setProjects] = useState([]);
+  const [showNote, setShowNote] = useState(false);
+  const [currentProjectId, setCurrentProjectId] = useState(null);
+  const navigate = useNavigate();
+
+  const handleNoteShow = (projectId) => {
+    setShowNote(true);
+    setCurrentProjectId(projectId);
+  };
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  const fetchProjects = async () => {
+    try {
+      const response = await fetch("http://localhost:8088/api/projects");
+      if (!response.ok) {
+        throw new Error("Failed to fetch projects");
+      }
+      const data = await response.json();
+      setProjects(data);
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+    }
+  };
   return (
     <DefaultLayout>
-      <div className="bg-gradient-to-r from-violet-100 to-indigo-100 flex items-center justify-center h-screen">
-        <div className="w-11/12 sm:w-11/12 md:w-8/12 lg:w-6/12 backdrop-blur-sm bg-white/40 p-6 rounded-lg shadow-sm border-violet-200 border">
+      <div className="bg-gradient-to-r from-violet-100 relative to-indigo-100 flex items-center justify-center h-screen">
+        <div className="w-full sm:w-full md:w-full lg:w-full backdrop-blur-sm bg-white/40 p-6 rounded-lg shadow-sm border-violet-200 border h-full">
           <div className="w-full flex justify-between items-center p-3">
             <h2 className="text-xl font-semibold">My Project</h2>
             <button
               id="openModalBtn"
+              onClick={() => navigate("/dashboard/projects/addproject")}
               class="flex items-center bg-gradient-to-r from-violet-300 to-indigo-300  border border-fuchsia-00 hover:border-violet-100 text-white font-semibold py-2 px-4 rounded-md transition-colors duration-300"
             >
               <svg
@@ -56,6 +84,51 @@ function Projects() {
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4">
+            {projects.map((project) => (
+              <div
+                key={project._id}
+                className="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer flex flex-col gap-2 border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300"
+              >
+                <h2 className="text-xl font-semibold mb-4">{project.name}</h2>
+                <p className="text-gray-700">{project.description}</p>
+                {project.githubLink && (
+                  <p>
+                    <a
+                      href={project.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500"
+                    >
+                      GitHub Link
+                    </a>
+                  </p>
+                )}
+                {project.contributors.length > 0 && (
+                  <div className="col-start-2 row-start-1 row-end-3 sm:mt-4 lg:mt-4 xl:mt-4">
+                    <div className="flex justify-end sm:justify-start lg:justify-end xl:justify-start -space-x-1.5">
+                      {project.contributors.map((contributor) => (
+                        <img
+                          key={contributor._id}
+                          src={contributor.avatarUrl}
+                          alt={contributor.name}
+                          className="w-6 h-6 rounded-full bg-violet-100"
+                          loading="lazy"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+                <button
+                  onClick={() => handleNoteShow(project._id)}
+                  className="flex items-center justify-center bg-gradient-to-r from-violet-300 to-indigo-300  border border-fuchsia-00 hover:border-violet-100 text-white font-semibold py-2 px-4 rounded-md transition-colors duration-300"
+                >
+                  Request Collaboration
+                </button>
+              </div>
+            ))}
+            {/* {projects.map((project)=> (
+
+            
             <div className="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300">
               <h2 className="text-xl font-semibold mb-4">Project 1</h2>
               <p className="text-gray-700">
@@ -97,8 +170,9 @@ function Projects() {
                 </div>
               </div>
             </div>
+            ))} */}
 
-            <div className="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300">
+            {/* <div className="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300">
               <h2 className="text-xl font-semibold mb-4">Project 2</h2>
               <p className="text-gray-700">
                 Description of Project 2 goes here. You can provide more details
@@ -138,9 +212,9 @@ function Projects() {
                   />
                 </div>
               </div>
-            </div>
+            </div> */}
 
-            <div className="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300">
+            {/* <div className="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300">
               <h2 className="text-xl font-semibold mb-4">Project 3</h2>
               <p className="text-gray-700">
                 Description of Project 2 goes here. You can provide more details
@@ -180,9 +254,9 @@ function Projects() {
                   />
                 </div>
               </div>
-            </div>
+            </div> */}
 
-            <div className="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300">
+            {/* <div className="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300">
               <h2 className="text-xl font-semibold mb-4">Project 4</h2>
               <p className="text-gray-700">
                 Description of Project 2 goes here. You can provide more details
@@ -222,10 +296,10 @@ function Projects() {
                   />
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
-
+        {showNote && <AddNote projectId={currentProjectId} />}
         <div
           id="myModal"
           className="fixed inset-0 z-10 overflow-hidden backdrop-blur-lg hidden flex items-center justify-center transition-transform duration-300"

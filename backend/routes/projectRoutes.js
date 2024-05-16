@@ -8,6 +8,7 @@ const {
   requestStatus,
   approveCollaborationRequest,
   rejectCollaborationRequest,
+  searchProjectsByName,
 } = require("../controllers/projectControllers");
 
 const router = express.Router();
@@ -20,5 +21,6 @@ router.get("/:id/requests", getCollaborationRequests);
 router.put("/:id/requests/:requestId", requestStatus);
 router.put("/:id/requests/:requestId/approve", approveCollaborationRequest);
 router.put("/:id/requests/:requestId/reject", rejectCollaborationRequest);
+// router.get("/search", searchProjectsByName);
 
 module.exports = router;
