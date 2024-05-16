@@ -37,7 +37,7 @@ function Projects() {
             <h2 className="text-xl font-semibold">My Project</h2>
             <button
               id="openModalBtn"
-              onClick={() => navigate("/dashboard/projects/addproject")}
+              onClick={() => navigate("/dashboard/addproject")}
               class="flex items-center bg-gradient-to-r from-violet-300 to-indigo-300  border border-fuchsia-00 hover:border-violet-100 text-white font-semibold py-2 px-4 rounded-md transition-colors duration-300"
             >
               <svg
