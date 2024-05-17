@@ -60,7 +60,7 @@ const GroupChatModal = ({ children }) => {
         },
       };
       const { data } = await axios.get(
-        apiUrl + `/api/user?search=${search}`,
+        apiUrl + `/api/user/users?search=${search}`,
         config
       );
       setLoading(false);

@@ -18,7 +18,7 @@ import axios from "axios";
 import UpdateGroupChatModal from "../UserAvatar/UpdateGroupChatModal";
 import ScrollableChat from "../Miscellaneous/ScrollableChat";
 import animationData from "../../animations/typing.json";
-// import io from "socket.io-client";
+import io from "socket.io-client";
 const ENDPOINT = "http://localhost:8088";
 var socket, selectedChatCompare;
 
@@ -112,14 +112,13 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     }
   };
 
-  // useEffect(() => {
-  //   socket = io(ENDPOINT);
-  //   socket.emit("setup", user);
-  //   socket.on("connected", () => setSocketConnected(true));
-  //   socket.on("typing", () => setIsTyping(true));
-  //   socket.on("stop typing", () => setIsTyping(false));
-
-  // }, []);
+  useEffect(() => {
+    socket = io(ENDPOINT);
+    socket.emit("setup", user);
+    socket.on("connected", () => setSocketConnected(true));
+    socket.on("typing", () => setIsTyping(true));
+    socket.on("stop typing", () => setIsTyping(false));
+  }, []);
 
   useEffect(() => {
     fetchMessages();
@@ -127,21 +126,21 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     selectedChatCompare = selectedChat;
   }, [selectedChat]);
 
-  // useEffect(() => {
-  //   socket.on("message recieved", (newMessageRecieved) => {
-  //     if (
-  //       !selectedChatCompare || // if chat is not selected or doesn't match current chat
-  //       selectedChatCompare._id !== newMessageRecieved.chat._id
-  //     ) {
-  //       if (!notification.includes(newMessageRecieved)) {
-  //         setNotification([newMessageRecieved, ...notification]);
-  //         setFetchAgain(!fetchAgain);
-  //       }
-  //     } else {
-  //       setMessages([...messages, newMessageRecieved]);
-  //     }
-  //   });
-  // });
+  useEffect(() => {
+    socket.on("message recieved", (newMessageRecieved) => {
+      if (
+        !selectedChatCompare || // if chat is not selected or doesn't match current chat
+        selectedChatCompare._id !== newMessageRecieved.chat._id
+      ) {
+        if (!notification.includes(newMessageRecieved)) {
+          setNotification([newMessageRecieved, ...notification]);
+          setFetchAgain(!fetchAgain);
+        }
+      } else {
+        setMessages([...messages, newMessageRecieved]);
+      }
+    });
+  });
 
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
