@@ -32,9 +32,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
   const [renameLoading, setRenameLoading] = useState(false);
   const toast = useToast();
 
-  const apiUrl =
-    process.env.REACT_APP_BACKEND_URL ||
-    "https://chatter-box-0bzs.onrender.com";
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8088";
   const handleSearch = async (query) => {
     setSearch(query);
     if (!query) {
@@ -49,7 +47,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
         },
       };
       const { data } = await axios.get(
-        apiUrl + `/api/user?search=${search}`,
+        apiUrl + `/api/user/users?search=${search}`,
         config
       );
       console.log(data);
