@@ -5,9 +5,10 @@ import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Login from "./Login";
 import Features from "../components/Features";
-import Pricing from "../components/Pricing";
+// import Pricing from "../components/Pricing";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import Footer from "../components/Footer";
 
 const navigation = [
   { name: "Home", href: "#hero" },
@@ -188,7 +189,8 @@ function LandingPage() {
         </div>
       </div>
       <Features />
-      <Pricing />
+      {/* <Pricing /> */}
+      <Footer />
     </div>
   );
 }
