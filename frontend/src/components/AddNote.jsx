@@ -45,7 +45,7 @@ function AddNote({ projectId }) {
   };
 
   return (
-    <div className="flex absolute left-1/2 top-1/2 items-center min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="flex absolute left-[20%] shadow-md w-1/2 items-center min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto">
         <div className="max-w-md mx-auto my-10 bg-white dark:bg-gray-800 p-5 rounded-md shadow-sm">
           <div className="text-center">

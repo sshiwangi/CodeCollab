@@ -32,8 +32,14 @@ const createDiscussion = asyncHandler(async (req, res) => {
   res.status(201).json(discussion);
 });
 
+const likeDiscussions = asyncHandler(async (req, res) => {});
+
+const commentOnDiscussions = asyncHandler(async (req, res) => {});
+
 module.exports = {
   createDiscussion,
   getAllDiscussions,
   getSingleDiscussion,
+  likeDiscussions,
+  commentOnDiscussions,
 };
