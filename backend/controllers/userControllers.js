@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const User = require("../model/userModel");
 const generateToken = require("../config/generateToken");
 const Project = require("../model/projectModel");
+const validator = require('validator');
 
 const signup = asyncHandler(async (req, res) => {
   const { name, email, password, confirmPassword } = req.body;
@@ -10,6 +11,12 @@ const signup = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Please fill all the fields");
   }
+  
+    if (!validator.isEmail(email)) {
+    res.status(400);
+    throw new Error("Invalid Email Address");
+  }
+
 
   if (password !== confirmPassword) {
     res.status(400);

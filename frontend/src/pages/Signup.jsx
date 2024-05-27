@@ -4,6 +4,7 @@ import axios from "axios";
 import { Button } from "@chakra-ui/button";
 import { InputRightElement, InputGroup } from "@chakra-ui/input";
 import { useNavigate } from "react-router-dom";
+import validator from "validator";
 
 function Signup() {
   const [show, setShow] = useState(false);
@@ -31,6 +32,17 @@ function Signup() {
         position: "bottom",
       });
 
+      setLoading(false);
+      return;
+    }
+    if (!validator.isEmail(email)) {
+      toast({
+        title: "Invalid Email Address",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
       setLoading(false);
       return;
     }
@@ -126,7 +138,7 @@ function Signup() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6">
+          <div className="space-y-6">
             <div>
               <label
                 htmlFor="email"
@@ -237,7 +249,6 @@ function Signup() {
 
             <div>
               <button
-                type="submit"
                 onClick={submitHandler}
                 isLoading={loading}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -245,7 +256,7 @@ function Signup() {
                 Sign up
               </button>
             </div>
-          </form>
+          </div>
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Already have an account?{" "}
