@@ -1,7 +1,8 @@
 const express = require("express");
 const {
   signup,
-  login, allUsers,
+  login,
+  allUsers,
   getAllUserProjects,
   getAllUserProjectsRequests,
   fetchUserProfile,
