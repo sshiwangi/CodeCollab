@@ -116,8 +116,6 @@ const getAllUserProjectsRequests = asyncHandler(async (req, res) => {
   res.json(allRequests);
 });
 
-
-
 module.exports = {
   signup,
   login,

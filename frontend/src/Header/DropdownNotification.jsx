@@ -1,9 +1,11 @@
+import { useToast } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 const DropdownNotification = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [notifying, setNotifying] = useState(true);
+  const toast = useToast();
 
   const trigger = useRef(null);
   const dropdown = useRef(null);
@@ -32,6 +34,24 @@ const DropdownNotification = () => {
     return () => document.removeEventListener("keydown", keyHandler);
   }, [dropdownOpen]);
 
+  const handleAcceptButton = () => {
+    toast({
+      title: "Request Accepted",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+      position: "bottom",
+    });
+  };
+  const handleRejectButton = () => {
+    toast({
+      title: "Request Denied",
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+      position: "bottom",
+    });
+  };
   return (
     <li className="relative">
       <Link
@@ -70,7 +90,7 @@ const DropdownNotification = () => {
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`absolute -right-27 mt-2.5 flex h-90 w-75 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark sm:right-0 sm:w-80 ${
+        className={`absolute -right-27 mt-2.5 flex w-75 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark sm:right-0 sm:w-80 ${
           dropdownOpen === true ? "block" : "hidden"
         }`}
       >
@@ -85,17 +105,33 @@ const DropdownNotification = () => {
               to="#"
             >
               <p className="text-sm">
-                <span className="text-black dark:text-white">
-                  Edit your information in a swipe
+                <span className="text-black font-bold dark:text-white">
+                  shiwangi has requested to collaborate on the project college
+                  API
                 </span>{" "}
-                Sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim.
+                <p className="text-sm">
+                  {" "}
+                  You can accept or deny the request by clicking below
+                </p>
               </p>
 
-              <p className="text-xs">12 May, 2025</p>
+              <div className="flex gap-2">
+                <button
+                  onClick={handleAcceptButton}
+                  className="bg-green-400 rounded-md p-2 text-white font-bold text-md"
+                >
+                  Accept
+                </button>
+                <button
+                  onClick={handleRejectButton}
+                  className="bg-red-700 rounded-md p-2 text-white font-bold text-md"
+                >
+                  Deny
+                </button>
+              </div>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
               className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
               to="#"
@@ -109,8 +145,8 @@ const DropdownNotification = () => {
 
               <p className="text-xs">24 Feb, 2025</p>
             </Link>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <Link
               className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
               to="#"
@@ -125,8 +161,8 @@ const DropdownNotification = () => {
 
               <p className="text-xs">04 Jan, 2025</p>
             </Link>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <Link
               className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
               to="#"
@@ -141,7 +177,7 @@ const DropdownNotification = () => {
 
               <p className="text-xs">01 Dec, 2024</p>
             </Link>
-          </li>
+          </li> */}
         </ul>
       </div>
     </li>
