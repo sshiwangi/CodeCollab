@@ -18,6 +18,7 @@ import axios from "axios";
 import UpdateGroupChatModal from "../UserAvatar/UpdateGroupChatModal";
 import ScrollableChat from "../Miscellaneous/ScrollableChat";
 import animationData from "../../animations/typing.json";
+import { IoMdSend } from "react-icons/io";
 import io from "socket.io-client";
 const ENDPOINT = "http://localhost:8088";
 var socket, selectedChatCompare;
@@ -78,7 +79,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   };
 
   const sendMessage = async (event) => {
-    if (event.key === "Enter" && newMessage) {
+    if (event.type === "click" || (event.key === "Enter" && newMessage)) {
       socket.emit("stop typing", selectedChat._id);
       try {
         const config = {
@@ -245,13 +246,25 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               ) : (
                 <></>
               )}
-              <Input
-                variant="filled"
-                bg="#E0E0E0"
-                placeholder="Enter a message.."
-                value={newMessage}
-                onChange={typingHandler}
-              />
+              <div className="flex items-center justify-center space-x-2">
+                <Input
+                  variant="filled"
+                  bg="#E0E0E0"
+                  placeholder="Enter a message.."
+                  value={newMessage}
+                  onChange={typingHandler}
+                />
+
+                <IoMdSend
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    marginRight: "10px",
+                    cursor: "pointer",
+                  }}
+                  onClick={sendMessage}
+                />
+              </div>
             </FormControl>
           </Box>
         </>
