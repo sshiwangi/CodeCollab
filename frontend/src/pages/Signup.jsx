@@ -47,6 +47,20 @@ function Signup() {
       return;
     }
 
+    const passwordErrors = validatePassword(password);
+    if (passwordErrors.length > 0) {
+      toast({
+        title: "Password Error",
+        description: passwordErrors.join(" "),
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
+      return;
+    }
+
     if (password !== confirmpassword) {
       toast({
         title: "Passwords Do Not Match",
@@ -121,6 +135,34 @@ function Signup() {
 
       setLoading(false);
     }
+  };
+
+  const validatePassword = (password) => {
+    const lengthRequirement = /^.{8,16}$/;
+    const uppercaseRequirement = /[A-Z]/;
+    const lowercaseRequirement = /[a-z]/;
+    const digitRequirement = /\d/;
+    const specialCharRequirement = /[!@#$%^&*()\-_=+\[\]{}|;:'",.<>?/~]/;
+
+    const errors = [];
+
+    if (!lengthRequirement.test(password)) {
+      errors.push("Password must be 8-16 characters long.");
+    }
+    if (!uppercaseRequirement.test(password)) {
+      errors.push("Password must include at least one uppercase letter.");
+    }
+    if (!lowercaseRequirement.test(password)) {
+      errors.push("Password must include at least one lowercase letter.");
+    }
+    if (!digitRequirement.test(password)) {
+      errors.push("Password must include at least one number.");
+    }
+    if (!specialCharRequirement.test(password)) {
+      errors.push("Password must include at least one special character.");
+    }
+
+    return errors;
   };
 
   return (
