@@ -4,6 +4,33 @@ const generateToken = require("../config/generateToken");
 const Project = require("../model/projectModel");
 const validator = require('validator');
 
+const validatePassword=(password) =>{
+  const lengthRequirement = /^.{12,16}$/;
+  const uppercaseRequirement = /[A-Z]/;
+  const lowercaseRequirement = /[a-z]/;
+  const digitRequirement = /\d/;
+  const specialCharRequirement = /[!@#$%^&*()\-_=+\[\]{}|;:'",.<>?/~]/;
+
+const errors=[];
+ if (!lengthRequirement.test(password)) {
+    errors.push("Password must be 8-16 characters long.");
+  }
+  if (!uppercaseRequirement.test(password)) {
+    errors.push("Password must include at least one uppercase letter.");
+  }
+  if (!lowercaseRequirement.test(password)) {
+    errors.push("Password must include at least one lowercase letter.");
+  }
+  if (!digitRequirement.test(password)) {
+    errors.push("Password must include at least one number.");
+  }
+  if (!specialCharRequirement.test(password)) {
+    errors.push("Password must include at least one special character.");
+  }
+
+  return errors;
+};
+
 const signup = asyncHandler(async (req, res) => {
   const { name, email, password, confirmPassword } = req.body;
 
@@ -17,6 +44,11 @@ const signup = asyncHandler(async (req, res) => {
     throw new Error("Invalid Email Address");
   }
 
+  const passwordErrors= validatePassword(password);
+  if(passwordErrors.length>0){
+    res.status(400).json({errors:passwordErrors});
+    return;
+  }
 
   if (password !== confirmPassword) {
     res.status(400);
