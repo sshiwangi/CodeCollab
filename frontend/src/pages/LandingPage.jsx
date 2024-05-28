@@ -13,7 +13,7 @@ import Footer from "../components/Footer";
 const navigation = [
   { name: "Home", href: "#hero" },
   { name: "About", href: "#about" },
-  { name: "Pricing", href: "#pricing" },
+  // { name: "Pricing", href: "#pricing" },
   { name: "Features", href: "#features" },
 ];
 
@@ -30,11 +30,17 @@ function LandingPage() {
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img
+              {/* <img
                 className="h-8 w-auto"
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                 alt=""
-              />
+              /> */}
+              <span className="flex items-center space-x-1">
+                <div className="company-logo text-white bg-indigo-600 text-md px-3 py-1 rounded-md width-[20px]">
+                  <b>Code</b>
+                </div>
+                <div className="company-text text-md font-bold">Collab</div>
+              </span>
             </a>
           </div>
           <div className="flex lg:hidden">
@@ -58,10 +64,10 @@ function LandingPage() {
               </a>
             ))}
           </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end text-md">
             <a
               href="/login"
-              className="text-sm font-semibold leading-6 text-gray-900"
+              className="text-md font-semibold leading-6 text-gray-900"
             >
               Log in <span aria-hidden="true">&rarr;</span>
             </a>
@@ -167,7 +173,7 @@ function LandingPage() {
                 </a>
                 <a
                   href="#"
-                  className="text-sm font-semibold leading-6 text-gray-900"
+                  className="text-sm font-semibold leading-6 text-gray-900  flex items-center"
                 >
                   Learn more <span aria-hidden="true">→</span>
                 </a>

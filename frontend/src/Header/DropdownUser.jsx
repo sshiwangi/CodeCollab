@@ -1,18 +1,27 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-import UserOne from "../Images/workingProfessional.jpg";
+import { Avatar } from "@chakra-ui/react";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [user, setUser] = useState({ name: "", photo: "" });
   const navigate = useNavigate();
 
   const trigger = useRef(null);
   const dropdown = useRef(null);
+
   const logoutHandler = () => {
     localStorage.removeItem("userInfo");
     navigate("/");
   };
+
+  // Fetch user data from local storage on component mount
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    if (userInfo) {
+      setUser({ name: userInfo.name, photo: userInfo.photo });
+    }
+  }, []);
 
   // close on click outside
   useEffect(() => {
@@ -51,14 +60,11 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Thomas Anree
+            {user.name}
           </span>
-          <span className="block text-xs">UX Designer</span>
         </span>
 
-        <span className="h-5 w-5 rounded-full">
-          <img src={UserOne} alt="User" />
-        </span>
+        <Avatar name={user.name} src={user.photo} size="sm" />
 
         <svg
           className="hidden fill-current sm:block"
